@@ -31,3 +31,4 @@
 /home/anhtu/personal_project/fintech-wallet/backend/obj/Debug/net10.0/backend.pdb
 /home/anhtu/personal_project/fintech-wallet/backend/obj/Debug/net10.0/backend.genruntimeconfig.cache
 /home/anhtu/personal_project/fintech-wallet/backend/obj/Debug/net10.0/ref/backend.dll
+/home/anhtu/personal_project/fintech-wallet/backend/obj/Debug/net10.0/backend.sourcelink.json

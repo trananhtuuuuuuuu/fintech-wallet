@@ -1,16 +1,14 @@
-public class FirstController
+using Microsoft.AspNetCore.Mvc;
+
+[ApiController]
+[Route("api/hello")]
+public class FirstController : ControllerBase
 {
-  
+  [HttpGet]
+  public IActionResult GetFunction()
+  {
+    return Ok("Hello from The first Controller");
+  }
 }
 
 
-/*
-docker run -d \
-  --name wallet-web \
-  -e POSTGRES_DB=wallet_db \
-  -e POSTGRES_USER=postgres \
-  -e POSTGRES_PASSWORD=123456 \
-  -p 5500:5432 \
-  -v wallet-data:/var/lib/postgresql/data \
-  postgres:16
-*/
