@@ -4,10 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace backend.Data;
 
-public class WalletDbContext : DbContext
+public class WalletDbContext(DbContextOptions<WalletDbContext> options) : DbContext(options)
 {
-  public WalletDbContext(DbContextOptions<WalletDbContext> options) : base(options) { }
-
   public DbSet<User> Users { get; set; }
   public DbSet<Wallet> Wallets { get; set; }
   public DbSet<Transfer> Transfers { get; set; }
@@ -20,8 +18,10 @@ public class WalletDbContext : DbContext
 
     modelBuilder.Entity<User>().HasKey(u => u.Id);
     modelBuilder.Entity<Wallet>().HasKey(w => w.Id);
+    modelBuilder.Entity<Transfer>().HasKey(t => t.Id);
+    modelBuilder.Entity<ManagementWallet>().HasKey(m => m.Id);
 
-    // Configure User-Wallet relationship (One-to-Many)
+    // Configure User-Wallet relatPionship (One-to-Many)
     modelBuilder.Entity<User>()
       .HasMany(u => u.Wallets)
       .WithOne(w => w.User)

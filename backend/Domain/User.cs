@@ -13,4 +13,23 @@ public class User {
 
   public ICollection<Wallet>? Wallets { get; set; }
   public ICollection<ManagementWallet>? ManagementWallets  {get; set; }
+
+  public User(){}
+
+  public User(string fullName, 
+  string address,
+  string gender, 
+  string phoneNumber, 
+  string email, 
+  string account, 
+  string password)
+  {
+    this.FullName = fullName;
+    this.Address = address;
+    this.Gender = gender;
+    this.PhoneNumber = phoneNumber;
+    this.Email = email;
+    this.Account = account;
+    this.Password = password;
+  }
 }
