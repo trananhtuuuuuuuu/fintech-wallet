@@ -19,7 +19,7 @@ public class UserController(IUserService userService) : ControllerBase
   {
     User user = UserMapper.ToDomain(createUserRequest);
     user.Id = new Guid();
-    return UserMapper.ToDTO(
+    return UserMapper.ToCreateUserResponse(
       await _userService.CreateUserAsync(user)
     );
   }

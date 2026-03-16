@@ -1,6 +1,9 @@
 using backend.Data;
 using backend.Domain;
+using backend.Dto.user;
+using backend.Mappers;
 using backend.Services.Users;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend.Services.Users;
 public class UserService(WalletDbContext context) : IUserService
@@ -15,22 +18,38 @@ public class UserService(WalletDbContext context) : IUserService
     return user;
   }
 
-  public Task<bool> DeleteUserAsync(Guid id)
+  public async Task<bool> DeleteUserAsync(Guid id)
+  {
+    // need concurrency processing
+    User? user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+
+    if(user is null)
+    {
+      throw new KeyNotFoundException("User Not Found");
+    }
+    try
+    {
+        await _context.SaveChangesAsync();
+        return true;
+    }
+    catch (DbUpdateConcurrencyException)
+    {
+        return false;
+    }
+  }
+
+  public async Task<IEnumerable<User>> GetAllUSerAsync()
   {
     throw new NotImplementedException();
   }
 
-  public Task<IEnumerable<User>> GetAllUSerAsync()
+  public async Task<User> GetUserByIdAsync(Guid id)
   {
-    throw new NotImplementedException();
+    User? user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id) ?? throw new KeyNotFoundException("User Not Found");
+    return user;
   }
 
-  public Task<User> GetUserByIdAsync(Guid id)
-  {
-    throw new NotImplementedException();
-  }
-
-  public Task<User> UpdateUserAsync(User user)
+  public async Task<User> UpdateUserAsync(User user)
   {
     throw new NotImplementedException();
   }

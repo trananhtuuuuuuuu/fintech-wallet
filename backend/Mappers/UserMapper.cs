@@ -1,4 +1,5 @@
 using backend.Domain;
+using backend.Dto.user;
 using backend.Requests.Users;
 using backend.Responses.Users;
 namespace backend.Mappers;
@@ -18,7 +19,7 @@ public class UserMapper
     );
   }
 
-  public static CreateUserResponse ToDTO(User user)
+  public static CreateUserResponse ToCreateUserResponse(User user)
   {
     return new CreateUserResponse(
       user.FullName,
@@ -28,6 +29,18 @@ public class UserMapper
       user.Email,
       user.Account,
       user.RefreshToken
+    );
+  }
+
+  public static UserDTO ToDTO(User user)
+  {
+    return new UserDTO(
+      user.FullName,
+      user.Address,
+      user.Gender,
+      user.PhoneNumber,
+      user.Email,
+      user.Account
     );
   }
 
